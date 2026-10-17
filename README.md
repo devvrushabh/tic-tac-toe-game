@@ -5,6 +5,9 @@ A complete, responsive, tabletop-inspired Tic-Tac-Toe web application inspired b
 ![CI - Build & Test](https://github.com/devvrushabh/tic-tac-toe-game/actions/workflows/ci.yml/badge.svg)
 ![Deploy to Netlify](https://github.com/devvrushabh/tic-tac-toe-game/actions/workflows/deploy-netlify.yml/badge.svg)
 
+🔗 **Live Deployment**: [https://tic-tac-toe-tabletop-126.netlify.app](https://tic-tac-toe-tabletop-126.netlify.app)
+📁 **GitHub Repository**: [https://github.com/devvrushabh/tic-tac-toe-game](https://github.com/devvrushabh/tic-tac-toe-game)
+
 ---
 
 ## 🌟 Highlights & Features
