@@ -1229,3 +1229,156 @@
     font-size: 0.78rem;
   }
 }
+
+/* ==========================================================================
+   Start Screen / Pause Overlay ('press here to play')
+   Inspired by Gametable's Tabletop Intro Screen
+   ========================================================================== */
+.start-screen-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+  animation: start-fade-in 0.3s ease;
+}
+
+@keyframes start-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.start-screen-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.02);
+  transition: transform 0.4s ease;
+}
+
+.start-screen-overlay:hover .start-screen-bg {
+  transform: scale(1.04);
+}
+
+.start-screen-dimmer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.58) 100%);
+  pointer-events: none;
+}
+
+.start-screen-top-bar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+}
+
+.start-corner-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(0, 168, 185, 0.88);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease;
+}
+
+.start-corner-btn:hover {
+  background: rgba(0, 195, 215, 1);
+  transform: scale(1.08);
+}
+
+.start-screen-center {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-play-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  outline: none;
+}
+
+.start-play-btn:hover {
+  transform: scale(1.06);
+}
+
+.start-play-btn:active {
+  transform: scale(0.96);
+}
+
+.start-play-svg {
+  width: 250px;
+  height: 250px;
+  max-width: 72vw;
+  max-height: 72vw;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.55));
+}
+
+.start-play-ring {
+  transition: stroke-width 0.2s ease;
+}
+
+.start-play-btn:hover .start-play-ring {
+  stroke-width: 17;
+}
+
+.start-play-triangle {
+  transform-origin: 120px 100px;
+  transition: transform 0.2s ease;
+}
+
+.start-play-btn:hover .start-play-triangle {
+  transform: scale(1.04);
+}
+
+.start-play-text {
+  font-family: Arial, Helvetica, var(--font-family-base), sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  fill: #ffffff;
+  letter-spacing: -0.3px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.75));
+}
+
+@media (max-width: 540px) {
+  .start-screen-overlay {
+    border-radius: 18px;
+  }
+  .start-play-svg {
+    width: 210px;
+    height: 210px;
+  }
+  .start-play-text {
+    font-size: 23px;
+  }
+}
+

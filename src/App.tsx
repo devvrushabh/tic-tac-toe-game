@@ -14,6 +14,7 @@ import { TurnIndicator } from './components/TurnIndicator';
 import { GameBoard } from './components/GameBoard';
 import { GameOverModal } from './components/GameOverModal';
 import { ResetModal } from './components/ResetModal';
+import { StartScreen } from './components/StartScreen';
 import { InfoSection } from './components/InfoSection';
 import { Footer } from './components/Footer';
 
@@ -45,6 +46,9 @@ export function App() {
   const [status, setStatus] = useState<GameStatus>('in_progress');
   const [winInfo, setWinInfo] = useState<WinInfo | null>(null);
   const [isAiThinking, setIsAiThinking] = useState<boolean>(false);
+
+  // Start Screen state
+  const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
 
   // Modals state
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -259,12 +263,24 @@ export function App() {
         soundEnabled={soundEnabled}
         onToggleSound={() => setSoundEnabled((prev) => !prev)}
         onNewGame={() => handleStartGame(false)}
+        onShowStartScreen={() => setIsGameStarted(false)}
       />
 
       {/* Main Game Stage */}
       <main id="middle" className="main-content">
         <div className="tabletop-stage">
           <div className="tabletop-frame">
+            {/* Start / Pause Screen Overlay ('press here to play') */}
+            <StartScreen
+              isOpen={!isGameStarted}
+              onStart={() => {
+                setIsGameStarted(true);
+                handleStartGame(false);
+              }}
+              soundEnabled={soundEnabled}
+              onToggleSound={() => setSoundEnabled((prev) => !prev)}
+            />
+
             {/* Top Game Controls (Opponent & Difficulty) */}
             <GameControls
               mode={mode}
@@ -333,6 +349,7 @@ export function App() {
         soundEnabled={soundEnabled}
         onToggleSound={() => setSoundEnabled((prev) => !prev)}
         onNewGame={() => handleStartGame(false)}
+        onShowStartScreen={() => setIsGameStarted(false)}
       />
 
       {/* Reset Confirmation Dialog */}

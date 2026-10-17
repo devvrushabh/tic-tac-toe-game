@@ -8,6 +8,7 @@ interface NavigationDrawerProps {
   soundEnabled: boolean;
   onToggleSound: () => void;
   onNewGame: () => void;
+  onShowStartScreen?: () => void;
 }
 
 export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
@@ -17,6 +18,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
   soundEnabled,
   onToggleSound,
   onNewGame,
+  onShowStartScreen,
 }) => {
   if (!isOpen) return null;
 
@@ -57,6 +59,21 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
 
         {/* Navigation Links */}
         <nav className="drawer-nav">
+          {onShowStartScreen && (
+            <button
+              type="button"
+              className="drawer-nav-item"
+              onClick={() => {
+                sound.playButtonClick();
+                onShowStartScreen();
+                onClose();
+              }}
+            >
+              <span className="nav-icon">⏸️</span>
+              <span>Pause / Start Screen</span>
+            </button>
+          )}
+
           <button
             type="button"
             className="drawer-nav-item"

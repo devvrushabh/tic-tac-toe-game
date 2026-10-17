@@ -7,6 +7,7 @@ interface HeaderProps {
   soundEnabled: boolean;
   onToggleSound: () => void;
   onNewGame: () => void;
+  onShowStartScreen?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -15,6 +16,7 @@ export const Header: React.FC<HeaderProps> = ({
   soundEnabled,
   onToggleSound,
   onNewGame,
+  onShowStartScreen,
 }) => {
   return (
     <header className="site-header" role="banner">
@@ -49,6 +51,26 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right Header Controls */}
         <div className="header-actions">
+          {/* Pause / Start Screen button */}
+          {onShowStartScreen && (
+            <button
+              type="button"
+              className="header-action-btn pause-screen-btn"
+              onClick={() => {
+                sound.playButtonClick();
+                onShowStartScreen();
+              }}
+              title="Return to Start / Pause Screen"
+              aria-label="Return to Start / Pause Screen"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="6" y="4" width="4" height="16" fill="currentColor" stroke="none" />
+                <rect x="14" y="4" width="4" height="16" fill="currentColor" stroke="none" />
+              </svg>
+              <span className="header-btn-text">Pause</span>
+            </button>
+          )}
+
           {/* Quick New Game button */}
           <button
             type="button"
