@@ -3,9 +3,11 @@
 A complete, responsive, tabletop-inspired Tic-Tac-Toe web application inspired by [Gametable.org](https://gametable.org/games/tic-tac-toe/). Built with **React 19**, **TypeScript**, **Vite**, and **Vanilla CSS**.
 
 ![CI - Build & Test](https://github.com/devvrushabh/tic-tac-toe-game/actions/workflows/ci.yml/badge.svg)
+![Deploy to GitHub Pages](https://github.com/devvrushabh/tic-tac-toe-game/actions/workflows/deploy-pages.yml/badge.svg)
 ![Deploy to Netlify](https://github.com/devvrushabh/tic-tac-toe-game/actions/workflows/deploy-netlify.yml/badge.svg)
 
-🔗 **Live Deployment**: [https://tic-tac-toe-tabletop-126.netlify.app](https://tic-tac-toe-tabletop-126.netlify.app)
+🔗 **Live Game (GitHub Pages)**: [https://devvrushabh.github.io/tic-tac-toe-game/](https://devvrushabh.github.io/tic-tac-toe-game/)
+🔗 **Live Game (Netlify)**: [https://tic-tac-toe-tabletop-126.netlify.app](https://tic-tac-toe-tabletop-126.netlify.app)
 📁 **GitHub Repository**: [https://github.com/devvrushabh/tic-tac-toe-game](https://github.com/devvrushabh/tic-tac-toe-game)
 
 ---
