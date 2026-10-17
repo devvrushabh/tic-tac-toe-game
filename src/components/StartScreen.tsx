@@ -33,14 +33,14 @@ export const StartScreen: React.FC<StartScreenProps> = ({
       className="start-screen-overlay"
       role="dialog"
       aria-modal="true"
-      aria-label="Start Game Screen"
+      aria-label="Start Dost Tic Tac Toe"
       onClick={() => {
         sound.playButtonClick();
         onStart();
       }}
     >
       {/* 3D Tabletop Background Image */}
-      <div className="start-screen-bg" style={{ backgroundImage: `url('/start-bg.jpg')` }} />
+      <div className="start-screen-bg" style={{ backgroundImage: `url('./start-bg.jpg')` }} />
 
       {/* Dark Vignette Overlay matching Gametable */}
       <div className="start-screen-dimmer" />
@@ -74,7 +74,7 @@ export const StartScreen: React.FC<StartScreenProps> = ({
         <button
           type="button"
           className="start-play-btn"
-          aria-label="Press here to play Tic Tac Toe"
+          aria-label="Press here to play Dost Tic Tac Toe"
           onClick={(e) => {
             e.stopPropagation();
             sound.playButtonClick();

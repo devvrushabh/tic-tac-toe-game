@@ -15,9 +15,9 @@ export const Footer: React.FC = () => {
       <div className="footer-content">
         <div className="footer-main-row">
           <div className="footer-brand-col">
-            <h3 className="footer-brand-title">Classic Tic-Tac-Toe</h3>
+            <h3 className="footer-brand-title">Dost Tic-Tac-Toe</h3>
             <p className="footer-description">
-              A responsive, high-performance web recreation inspired by tabletop games. Play against our 4-level AI engine or enjoy local 2-player pass & play on any device.
+              A responsive, high-performance web recreation of Dost Tic Tac Toe inspired by classic tabletop games. Play against our 4-level AI engine or enjoy local 2-player pass & play on any device.
             </p>
           </div>
 
@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
 
         <div className="footer-bottom-row">
           <p className="copyright-text">
-            © {CURRENT_YEAR} Classic Board Games • Designed for web & mobile
+            © {CURRENT_YEAR} Dost Tic Tac Toe • Designed for web & mobile
           </p>
         </div>
       </div>

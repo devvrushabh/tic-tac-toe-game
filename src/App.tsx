@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { BoardState, Difficulty, GameMode, GameStatus, Player, ScoreRecord, WinInfo } from './types';
+import type { BoardState, Difficulty, GameMode, GameStatus, Player, ScoreRecord, ScreenState, WinInfo } from './types';
 import { checkWinner, isBoardFull } from './services/gameLogic';
 import { getComputerMove } from './services/ai';
 import { sound } from './services/sound';
@@ -15,6 +15,7 @@ import { GameBoard } from './components/GameBoard';
 import { GameOverModal } from './components/GameOverModal';
 import { ResetModal } from './components/ResetModal';
 import { StartScreen } from './components/StartScreen';
+import { MainMenu } from './components/MainMenu';
 import { InfoSection } from './components/InfoSection';
 import { Footer } from './components/Footer';
 
@@ -47,8 +48,8 @@ export function App() {
   const [winInfo, setWinInfo] = useState<WinInfo | null>(null);
   const [isAiThinking, setIsAiThinking] = useState<boolean>(false);
 
-  // Start Screen state
-  const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
+  // Screen state: 'start' (press here to play) -> 'menu' (One Player, Two Player, Exit) -> 'game' (actual board)
+  const [screenState, setScreenState] = useState<ScreenState>('start');
 
   // Modals state
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -263,22 +264,44 @@ export function App() {
         soundEnabled={soundEnabled}
         onToggleSound={() => setSoundEnabled((prev) => !prev)}
         onNewGame={() => handleStartGame(false)}
-        onShowStartScreen={() => setIsGameStarted(false)}
+        onShowMenu={() => setScreenState('menu')}
       />
 
       {/* Main Game Stage */}
       <main id="middle" className="main-content">
         <div className="tabletop-stage">
           <div className="tabletop-frame">
-            {/* Start / Pause Screen Overlay ('press here to play') */}
+            {/* Start Screen Overlay ('press here to play') */}
             <StartScreen
-              isOpen={!isGameStarted}
+              isOpen={screenState === 'start'}
               onStart={() => {
-                setIsGameStarted(true);
-                handleStartGame(false);
+                setScreenState('menu');
               }}
               soundEnabled={soundEnabled}
               onToggleSound={() => setSoundEnabled((prev) => !prev)}
+            />
+
+            {/* Main Menu Screen (One Player, Two Player, Exit) */}
+            <MainMenu
+              isOpen={screenState === 'menu'}
+              onSelectOnePlayer={() => {
+                handleModeChange('ai');
+                handleStartGame(false);
+                setScreenState('game');
+              }}
+              onSelectTwoPlayer={() => {
+                handleModeChange('local');
+                handleStartGame(false);
+                setScreenState('game');
+              }}
+              onExit={() => {
+                setScreenState('start');
+              }}
+              soundEnabled={soundEnabled}
+              onToggleSound={() => setSoundEnabled((prev) => !prev)}
+              difficulty={difficulty}
+              onDifficultyChange={handleDifficultyChange}
+              onResetScores={() => setIsResetModalOpen(true)}
             />
 
             {/* Top Game Controls (Opponent & Difficulty) */}
@@ -349,7 +372,8 @@ export function App() {
         soundEnabled={soundEnabled}
         onToggleSound={() => setSoundEnabled((prev) => !prev)}
         onNewGame={() => handleStartGame(false)}
-        onShowStartScreen={() => setIsGameStarted(false)}
+        onShowMenu={() => setScreenState('menu')}
+        onShowStartScreen={() => setScreenState('start')}
       />
 
       {/* Reset Confirmation Dialog */}

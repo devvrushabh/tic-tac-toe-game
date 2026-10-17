@@ -10,6 +10,8 @@ export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert';
 
 export type GameStatus = 'in_progress' | 'won' | 'draw';
 
+export type ScreenState = 'start' | 'menu' | 'game';
+
 export type WinDirection =
   | 'row-0'
   | 'row-1'

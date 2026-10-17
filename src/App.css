@@ -1369,6 +1369,8 @@
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.75));
 }
 
+
+
 @media (max-width: 540px) {
   .start-screen-overlay {
     border-radius: 18px;
@@ -1382,3 +1384,361 @@
   }
 }
 
+/* ==========================================================================
+   Main Menu Screen (One Player, Two Player, Exit)
+   Exact match to Dost Tic Tac Toe reference
+   ========================================================================== */
+.main-menu-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 48;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  user-select: none;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+  animation: menu-pop-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes menu-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.main-menu-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  transform: scale(1.01);
+  transition: transform 0.4s ease;
+}
+
+.main-menu-top-bar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
+.menu-gear-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00e0a5 0%, #00b985 100%);
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 0 #007a57, 0 8px 18px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+}
+
+.menu-gear-btn:hover {
+  transform: scale(1.08) rotate(25deg);
+  box-shadow: 0 6px 0 #007a57, 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.menu-gear-btn:active {
+  transform: scale(0.96) translateY(2px) rotate(35deg);
+  box-shadow: 0 2px 0 #007a57, 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.menu-gear-icon {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.main-menu-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: clamp(28px, 6.5vh, 52px);
+}
+
+.main-menu-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 360px;
+  padding: 0 20px;
+}
+
+.menu-pill-btn {
+  width: 100%;
+  height: 62px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #00dca4 0%, #00b887 100%);
+  border: 3px solid #28e8b6;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.45),
+    0 6px 0 #007c58,
+    0 12px 22px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  user-select: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.menu-pill-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.6),
+    0 8px 0 #007c58,
+    0 16px 28px rgba(0, 0, 0, 0.32);
+}
+
+.menu-pill-btn:active {
+  transform: translateY(4px);
+  filter: brightness(0.96);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.3),
+    0 2px 0 #007c58,
+    0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.menu-pill-text {
+  font-family: 'Fredoka', 'Outfit', system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.28);
+}
+
+/* ==========================================================================
+   Menu Settings Modal
+   ========================================================================== */
+.menu-settings-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: menu-fade-in 0.2s ease;
+}
+
+.menu-settings-modal {
+  background: #2b2b2b;
+  border: 3px solid #444444;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  overflow: hidden;
+  animation: modal-pop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.menu-settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #222222;
+  border-bottom: 2px solid #3a3a3a;
+}
+
+.menu-settings-title {
+  font-family: 'Fredoka', 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #00e0a5;
+  margin: 0;
+}
+
+.menu-settings-close-btn {
+  background: none;
+  border: none;
+  color: #888888;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.menu-settings-close-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-settings-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.settings-row-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settings-label {
+  font-family: 'Fredoka', 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.settings-desc {
+  font-size: 0.82rem;
+  color: #a0a0a0;
+}
+
+.settings-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 2px solid #555555;
+  background: #333333;
+  color: #a0a0a0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.settings-toggle-btn.active {
+  background: #00b887;
+  border-color: #00e0a5;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 184, 135, 0.4);
+}
+
+.diff-pills-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.diff-pill-btn {
+  padding: 8px 4px;
+  border-radius: 10px;
+  border: 2px solid #444444;
+  background: #363636;
+  color: #bbbbbb;
+  font-family: 'Fredoka', 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.diff-pill-btn:hover {
+  border-color: #00e0a5;
+  color: #ffffff;
+}
+
+.diff-pill-btn.active {
+  background: #00b887;
+  border-color: #00e0a5;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 184, 135, 0.4);
+}
+
+.settings-reset-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 2px solid #d9534f;
+  background: rgba(217, 83, 79, 0.15);
+  color: #ff6b6b;
+  font-family: 'Fredoka', 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settings-reset-btn:hover {
+  background: #d9534f;
+  color: #ffffff;
+}
+
+.menu-settings-footer {
+  padding: 14px 20px 18px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #3a3a3a;
+}
+
+.settings-done-btn {
+  padding: 10px 24px;
+  border-radius: 12px;
+  border: none;
+  background: #00b887;
+  color: #ffffff;
+  font-family: 'Fredoka', 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 184, 135, 0.35);
+}
+
+.settings-done-btn:hover {
+  background: #00dca4;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 540px) {
+  .main-menu-overlay {
+    border-radius: 18px;
+  }
+  .menu-pill-btn {
+    height: 54px;
+  }
+  .menu-pill-text {
+    font-size: 1.3rem;
+  }
+  .menu-gear-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .diff-pills-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

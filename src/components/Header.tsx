@@ -7,7 +7,7 @@ interface HeaderProps {
   soundEnabled: boolean;
   onToggleSound: () => void;
   onNewGame: () => void;
-  onShowStartScreen?: () => void;
+  onShowMenu?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,7 +16,7 @@ export const Header: React.FC<HeaderProps> = ({
   soundEnabled,
   onToggleSound,
   onNewGame,
-  onShowStartScreen,
+  onShowMenu,
 }) => {
   return (
     <header className="site-header" role="banner">
@@ -40,34 +40,36 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Brand Logo & Title */}
         <div className="header-brand">
-          <a href="#middle" className="brand-link" aria-label="Tic Tac Toe Game">
+          <a href="#middle" className="brand-link" aria-label="Dost Tic Tac Toe Game">
             <span className="brand-icon">
               <span className="brand-x">X</span>
               <span className="brand-o">O</span>
             </span>
-            <span className="brand-title">TIC TAC TOE</span>
+            <span className="brand-title">DOST TIC TAC TOE</span>
           </a>
         </div>
 
         {/* Right Header Controls */}
         <div className="header-actions">
-          {/* Pause / Start Screen button */}
-          {onShowStartScreen && (
+          {/* Main Menu button */}
+          {onShowMenu && (
             <button
               type="button"
               className="header-action-btn pause-screen-btn"
               onClick={() => {
                 sound.playButtonClick();
-                onShowStartScreen();
+                onShowMenu();
               }}
-              title="Return to Start / Pause Screen"
-              aria-label="Return to Start / Pause Screen"
+              title="Return to Main Menu"
+              aria-label="Return to Main Menu"
             >
               <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="6" y="4" width="4" height="16" fill="currentColor" stroke="none" />
-                <rect x="14" y="4" width="4" height="16" fill="currentColor" stroke="none" />
+                <rect x="4" y="4" width="6" height="6" rx="1" fill="currentColor" stroke="none" />
+                <rect x="14" y="4" width="6" height="6" rx="1" fill="currentColor" stroke="none" />
+                <rect x="4" y="14" width="6" height="6" rx="1" fill="currentColor" stroke="none" />
+                <rect x="14" y="14" width="6" height="6" rx="1" fill="currentColor" stroke="none" />
               </svg>
-              <span className="header-btn-text">Pause</span>
+              <span className="header-btn-text">Menu</span>
             </button>
           )}
 
@@ -112,7 +114,6 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => {
               onToggleSound();
               if (!soundEnabled) {
-                // If turning on, will play toggle
                 setTimeout(() => sound.playToggle(), 10);
               }
             }}

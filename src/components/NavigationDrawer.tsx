@@ -8,6 +8,7 @@ interface NavigationDrawerProps {
   soundEnabled: boolean;
   onToggleSound: () => void;
   onNewGame: () => void;
+  onShowMenu?: () => void;
   onShowStartScreen?: () => void;
 }
 
@@ -18,6 +19,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
   soundEnabled,
   onToggleSound,
   onNewGame,
+  onShowMenu,
   onShowStartScreen,
 }) => {
   if (!isOpen) return null;
@@ -39,7 +41,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
           <div className="drawer-brand">
             <span className="brand-x">X</span>
             <span className="brand-o">O</span>
-            <span className="drawer-title">Tic Tac Toe</span>
+            <span className="drawer-title">Dost Tic Tac Toe</span>
           </div>
           <button
             type="button"
@@ -59,6 +61,21 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
 
         {/* Navigation Links */}
         <nav className="drawer-nav">
+          {onShowMenu && (
+            <button
+              type="button"
+              className="drawer-nav-item"
+              onClick={() => {
+                sound.playButtonClick();
+                onShowMenu();
+                onClose();
+              }}
+            >
+              <span className="nav-icon">🏠</span>
+              <span>Main Menu</span>
+            </button>
+          )}
+
           {onShowStartScreen && (
             <button
               type="button"
@@ -70,7 +87,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
               }}
             >
               <span className="nav-icon">⏸️</span>
-              <span>Pause / Start Screen</span>
+              <span>Start Screen (Press to Play)</span>
             </button>
           )}
 
@@ -155,7 +172,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
         </nav>
 
         <div className="drawer-footer">
-          <p>© Classic Board Game Studio</p>
+          <p>© Dost Tic Tac Toe</p>
           <p className="subtext">Inspired by Gametable.org</p>
         </div>
       </div>
